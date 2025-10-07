@@ -18,7 +18,7 @@
 //     }
 // }
 
-use num::Complex;
+use num::{range, Complex};
 use std::str::FromStr;
 
 /**
@@ -123,8 +123,33 @@ fn write_image(filename: &str, pixels: &[u8], bounds: (usize, usize)) -> Result<
     Ok(())
 }
 
-use std::env;
+use std::{env, vec};
 fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    if args.len() != 5 {
+        eprintln!("A");
+        std::process::exit(1);
+    }
+
+    for arg in args {
+        println!("{}", arg);
+    }
+
+    // let bounds = parse_pair::<usize>(&args[2], 'x')
+    //     .expect("error");
+
+    // let upper_left = parse_complex(&args[3])
+    //     .expect("error");
+
+    // let lower_right = parse_complex(&args[4])
+    //     .expect("error");
+
+    // let mut pixels = vec![0; bounds.0 * bounds.1];
+
+    // render(&mut pixels, bounds, upper_left, lower_right);
+
+    // write_image(&args[1], &pixels, bounds)
+    //     .expect("error");
 
 }
-
