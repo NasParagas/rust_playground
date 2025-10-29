@@ -51,11 +51,11 @@ fn main()
     let t_avg_ns = as_ns(t_diff) as f64 / n as f64;
     let q_avg_ns = as_ns(q_diff) as f64 / n as f64;
 
-    println!("Loop total:                  {:?}", loop_total);
-    println!("std::Instant::now total:     {:?}", t_total);
-    println!("quanta::Clock::now total:    {:?}", q_total);
-    println!("std minus empty (avg ns):    {:.3} ns/call", t_avg_ns);
-    println!("quanta minus empty (avg ns): {:.3} ns/call", q_avg_ns);
+    println!("Loop total:               {:?}", loop_total);
+    println!("std::Instant::now total:  {:?}", t_total);
+    println!("quanta::Clock::now total: {:?}", q_total);
+    println!("std - Loop  (avg ns):     {:.3} ns/call", t_avg_ns);
+    println!("quanta - Loop  (avg ns):  {:.3} ns/call", q_avg_ns);
 }
 
 // Duration→ns
