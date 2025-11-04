@@ -20,15 +20,15 @@ fn main()
 
     // blackbox()でコンパイラに食われないようにする
     // ループ自体の実行時間計測
-    let loop_start = Instant::now();
-    let dammy: u64 = 0;
+    let loop_start = clock.now();
+    let dummy: u64 = 0;
     for _ in 0..n 
     {
-        black_box(dammy);
+        black_box(dummy);
     }
     let loop_total = loop_start.elapsed();
 
-    // std::time::Instant::now() の実行時間計測
+// std::time::Instant::now() の実行時間計測
     let t_start = Instant::now();
     for _ in 0..n 
     {
