@@ -1,33 +1,32 @@
-use clap::{App, Arg};
-
+use clap::{Arg, Command};
 fn main() -> () {
-    let matches = App::new("echor")
+    let matches = Command::new("echo-rs")
         .version("0.1.0")
-        .author("example <example.ex.co.ex>")
         .about("echo in rust")
         .arg(
-            Arg::with_name("text") // ?
-                .value_name("TEXT") // helpとかで出てきそう
+            Arg::new("text")
+                .value_name("TEXT")
                 .help("Input text")
                 .required(true)
-                .min_values(1),
+                .num_args(1..),
         )
         .arg(
-            Arg::with_name("omit_newline")
-                .short("n") // -n で使用可能にする
+            Arg::new("omit_newline")
+                .short('n') // -n をフラグとして使用可能にする
                 .help("Do not print newline")
-                .takes_value(false),
+                .action(clap::ArgAction::SetTrue),
         )
         .get_matches(); // 引数を解析
     //
     // 変数matchesの中身↓
     // println!("{:#?}", matches);
-
-    let text = matches.values_of_lossy("text").unwrap();
-    // let text: Vec<String> = ... とすることで型を明示して宣言することもできる
-
-    let omit_newline = matches.is_present("omit_newline");
-
+    // let text: Vec<String> = ... とすることで型を明示して宣言する
+    let text: Vec<String> = matches
+        .get_many::<String>("text");
+        // .expect("TEXT is required")
+        // .map(|s| s.to_owned())
+        // .collect();
+    let omit_newline = matches.get_flag("omit_newline");
     let mut ending = "\n";
     if omit_newline {
         ending = "";
@@ -35,5 +34,5 @@ fn main() -> () {
     print!("{}{}", text.join(" "), ending);
     // 上記はまとめて
     // print!("{}{}", text.join(" "), if omit_newline { "\n" } else { "" });
-    // ともかける(Rustではifは値を返す。elseなしだとユニット型を返す)
+    // ともかける(Rustではifは値(ここではbool)を返す)
 }
